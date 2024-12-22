@@ -19,7 +19,7 @@ video {
 .paused-image {
     position: absolute;
     top: 50%;  /* Centers the image vertically */
-    left: 13.5%; /* Centers the image horizontally */
+    left: 50%; /* Centers the image horizontally */
     transform: translate(-50%, -50%); /* Fine-tunes centering */
     width: 100px;  /* Adjust the size of the image */
     opacity: 0.5;  /* Optional: adjust transparency */
