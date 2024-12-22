@@ -10,6 +10,8 @@ body {
 }
 
 video {
+    display:block;
+    margin: 0 auto;
     height: 100vh;
     object-fit: cover;
 }
