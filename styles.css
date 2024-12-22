@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    background: black;
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    height: 100vh;
+}
+
+video {
+    height: 100vh;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; /* Ensures the video covers the entire viewport */
+}
+
+.paused-image {
+    position: absolute;
+    top: 50%;  /* Centers the image vertically */
+    left: 50%; /* Centers the image horizontally */
+    transform: translate(-50%, -50%); /* Fine-tunes centering */
+    width: 100px;  /* Adjust the size of the image */
+    opacity: 0.5;  /* Optional: adjust transparency */
+    pointer-events: none;  /* Prevents the image from interfering with video interactions */
+}
