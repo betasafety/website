@@ -42,6 +42,11 @@ window.addEventListener('wheel', (event) => {
         currentIndex--;
         playVideo();
     }
+    if(videoPaused == true){
+        videoElement.pause();
+    } else {
+        videoElement.play();
+    }
 });
 
 // Mobile touch events (for swipe up/down)
@@ -62,6 +67,11 @@ window.addEventListener('touchend', (event) => {
         console.log("Swipe Up");
         currentIndex--;
         playVideo();
+    }
+    if(videoPaused == true){
+        videoElement.pause();
+    } else {
+        videoElement.play();
     }
 });
 
