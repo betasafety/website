@@ -1,2 +1,104 @@
-<link rel="stylesheet" href="style.css">
-<video src="1.mp4" width="640" height="360" controls></video>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline TikTok Clone</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      overflow: hidden;
+    }
+    video {
+      height: 100vh;
+      object-fit: cover;
+    }
+    #loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading...</div>
+  <video id="video" autoplay loop controls></video>
+
+  <script>
+    // List of video filenames (put them manually here if there's no server)
+    const videos = [
+      "1.mp4",
+      "2.mp4",
+      "3.mp4"
+    ];
+
+    let currentIndex = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    const videoElement = document.getElementById('video');
+    const loadingElement = document.getElementById('loading');
+
+    // Play a specific video
+    function playVideo(index) {
+      if (index >= 0 && index < videos.length) {
+        videoElement.src = videos[index];
+        videoElement.onloadeddata = () => {
+          loadingElement.style.display = 'none';
+        };
+        videoElement.onerror = () => {
+          loadingElement.textContent = 'Error loading video.';
+        };
+        loadingElement.style.display = 'block';
+        videoElement.play();
+      }
+    }
+
+    // Handle scrolling with mouse wheel
+    window.addEventListener('wheel', (event) => {
+      if (event.deltaY > 0 && currentIndex < videos.length - 1) {
+        currentIndex++;
+        playVideo(currentIndex);
+      } else if (event.deltaY < 0 && currentIndex > 0) {
+        currentIndex--;
+        playVideo(currentIndex);
+      }
+    });
+
+    // Handle touch events for swiping
+    window.addEventListener('touchstart', (event) => {
+      touchStartY = event.touches[0].clientY;
+    });
+
+    window.addEventListener('touchend', (event) => {
+      touchEndY = event.changedTouches[0].clientY;
+      handleSwipe();
+    });
+
+    // Determine swipe direction
+    function handleSwipe() {
+      const swipeThreshold = 50; // Minimum swipe distance in pixels
+      const swipeDistance = touchStartY - touchEndY;
+
+      if (swipeDistance > swipeThreshold && currentIndex < videos.length - 1) {
+        // Swipe up
+        currentIndex++;
+        playVideo(currentIndex);
+      } else if (swipeDistance < -swipeThreshold && currentIndex > 0) {
+        // Swipe down
+        currentIndex--;
+        playVideo(currentIndex);
+      }
+    }
+
+    // Load the first video on page load
+    window.onload = () => {
+      playVideo(currentIndex);
+    };
+  </script>
+</body>
+</html>
