@@ -1,5 +1,5 @@
 function generateRandomOrderVideoArray() {
-    const arr = [0, 1, 2]; // Array of video indices
+    const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]; // Array of video indices
     
     // Shuffle the array using the Fisher-Yates algorithm
     for (let i = arr.length - 1; i > 0; i--) {
@@ -18,7 +18,20 @@ let currentIndex = 0;
 const VideoArray = [
     "Videos/1.mp4",
     "Videos/2.mp4",
-    "Videos/3.mp4"
+    "Videos/3.mp4",
+    "Videos/4.mp4",
+    "Videos/5.mp4",
+    "Videos/6.mp4",
+    "Videos/7.mp4",
+    "Videos/8.mp4",
+    "Videos/9.mp4",
+    "Videos/10.mp4",
+    "Videos/11.mp4",
+    "Videos/12.mp4",
+    "Videos/13.mp4",
+    "Videos/14.mp4",
+    "Videos/15.mp4",
+    "Videos/16.mp4"
 ];
 
 const videoElement = document.getElementById("VideoLoc");
