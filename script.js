@@ -1,10 +1,9 @@
 function generateRandomOrderVideoArray() {
-    // Create an array of numbers from 1 to 10
-    const arr = [0, 1, 2];
+    const arr = [0, 1, 2]; // Array of video indices
     
     // Shuffle the array using the Fisher-Yates algorithm
     for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1)); // Generate a random index
+        const j = Math.floor(Math.random() * (i + 1));
         [arr[i], arr[j]] = [arr[j], arr[i]]; // Swap the elements
     }
     
@@ -30,8 +29,12 @@ playVideo();
 
 function playVideo() {
     videoElement.src = VideoArray[randomArray[currentIndex]];
+    if (!videoPaused) {
+        videoElement.play(); // Play the video when switching
+    }
 }
 
+// Handle wheel scrolling for video navigation
 window.addEventListener('wheel', (event) => {
     if (event.deltaY > 0 && currentIndex != randomArray.length - 1) {
         console.log("Wheel Down");
@@ -42,14 +45,9 @@ window.addEventListener('wheel', (event) => {
         currentIndex--;
         playVideo();
     }
-    if(videoPaused == true){
-        videoElement.pause();
-    } else {
-        videoElement.play();
-    }
 });
 
-// Mobile touch events (for swipe up/down)
+// Handle mobile touch swipe events for video navigation
 let touchStartY = 0; // Variable to track touch position
 
 window.addEventListener('touchstart', (event) => {
@@ -68,21 +66,17 @@ window.addEventListener('touchend', (event) => {
         currentIndex--;
         playVideo();
     }
-    if(videoPaused == true){
-        videoElement.pause();
-    } else {
-        videoElement.play();
-    }
 });
 
-document.addEventListener('click', (event) => {
-    if(videoPaused == true) {
+// Handle clicking to toggle pause/play state
+document.addEventListener('click', () => {
+    if (videoPaused) {
         videoElement.play();
         videoPaused = false;
-        PausedElement.hidden = true;
+        PausedElement.hidden = true; // Hide paused message
     } else {
         videoElement.pause();
         videoPaused = true;
-        PausedElement.hidden = false;
+        PausedElement.hidden = false; // Show paused message
     }
 });
